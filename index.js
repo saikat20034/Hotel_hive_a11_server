@@ -103,16 +103,16 @@ async function run() {
       res.send(result);
     });
 
-    // app.put('/rooms/update/:id', async (req, res) => {
-    //   const id = req.params.id;
-    //   const filter = { _id: new ObjectId(id) };
-    //   const options = { upsert: true };
-    //   const { status } = req.body;
-    //   const updateAvailable = {
-    //     $set: {
-    //       availability: status,
-    //     },
-    //   };
+    app.put('/rooms/update/:id', async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const { status } = req.body;
+      const updateAvailable = {
+        $set: {
+          availability: status,
+        },
+      };
       const result = await HotelCollection.updateOne(
         filter,
         updateAvailable,
