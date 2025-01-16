@@ -88,20 +88,20 @@ async function run() {
         .send({ success: true });
     });
 
-    app.get('/room/:lowValue/:highValue', async (req, res) => {
-      const lowValue = parseInt(req.params.lowValue);
-      const highValue = parseInt(req.params.highValue);
-      const query = { pricePerNight: { $gte: lowValue, $lte: highValue } };
-      const result = await HotelCollection.find(query).toArray();
-      res.send(result);
-    });
-
-    // app.get('/rooms/:id', verifyToken, async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: new ObjectId(id) };
-    //   const result = await HotelCollection.findOne(query);
+    // app.get('/room/:lowValue/:highValue', async (req, res) => {
+    //   const lowValue = parseInt(req.params.lowValue);
+    //   const highValue = parseInt(req.params.highValue);
+    //   const query = { pricePerNight: { $gte: lowValue, $lte: highValue } };
+    //   const result = await HotelCollection.find(query).toArray();
     //   res.send(result);
     // });
+
+    app.get('/rooms/:id', verifyToken, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await HotelCollection.findOne(query);
+      res.send(result);
+    });
 
     app.put('/rooms/update/:id', async (req, res) => {
       const id = req.params.id;
