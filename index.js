@@ -215,7 +215,7 @@ async function run() {
     // await client.close();
   }
 }
-// run().catch(console.dir);
+run().catch(console.dir);
 
 app.listen(port, () => {
   console.log(`Hotel Hive server listening on port ${port}`);
