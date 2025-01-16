@@ -63,19 +63,19 @@ async function run() {
       res.send(result);
     });
 
-    app.post('/jwt', async (req, res) => {
-      const user = req.body;
-      const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '1d',
-      });
-      res
-        .cookie('token', token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-        })
-        .send({ success: true });
-    });
+    // app.post('/jwt', async (req, res) => {
+    //   const user = req.body;
+    //   const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    //     expiresIn: '1d',
+    //   });
+    //   res
+    //     .cookie('token', token, {
+    //       httpOnly: true,
+    //       secure: process.env.NODE_ENV === 'production',
+    //       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    //     })
+    //     .send({ success: true });
+    // });
 
     app.get('/logout', (req, res) => {
       res
@@ -88,13 +88,13 @@ async function run() {
         .send({ success: true });
     });
 
-    // app.get('/room/:lowValue/:highValue', async (req, res) => {
-    //   const lowValue = parseInt(req.params.lowValue);
-    //   const highValue = parseInt(req.params.highValue);
-    //   const query = { pricePerNight: { $gte: lowValue, $lte: highValue } };
-    //   const result = await HotelCollection.find(query).toArray();
-    //   res.send(result);
-    // });
+    app.get('/room/:lowValue/:highValue', async (req, res) => {
+      const lowValue = parseInt(req.params.lowValue);
+      const highValue = parseInt(req.params.highValue);
+      const query = { pricePerNight: { $gte: lowValue, $lte: highValue } };
+      const result = await HotelCollection.find(query).toArray();
+      res.send(result);
+    });
 
     app.get('/rooms/:id', verifyToken, async (req, res) => {
       const id = req.params.id;
