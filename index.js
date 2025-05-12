@@ -12,10 +12,11 @@ const corsOptions = {
   origin: [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://hotel-hive9340.web.app',
+    'https://hotel-hive-5f52f.web.app/',
+    'https://hotel-hive-5f52f.firebaseapp.com/',
   ],
   credentials: true,
-  // optionSuccessStatus: 200,
+  optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -206,7 +207,7 @@ async function run() {
       res.send(result);
     });
 
-    await client.db('admin').command({ ping: 1 });
+    // await client.db('admin').command({ ping: 1 });
     console.log(
       'Pinged your deployment. You successfully connected to MongoDB!'
     );
